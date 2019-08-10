@@ -5,9 +5,9 @@ import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class RecipeService {
-  private recipes: Recipe[] = [
+  /* private recipes: Recipe[] = [
     new Recipe(
       "First recipe",
       "First description",
@@ -28,10 +28,17 @@ export class RecipeService {
         new Ingredient("Tomatoes", 3)
       ]
     )
-  ];
+  ]; */
 
+  private recipes: Recipe[] = [];
   recipesChanged = new Subject<Recipe[]>();
+
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
