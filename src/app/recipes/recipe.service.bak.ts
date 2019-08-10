@@ -5,7 +5,7 @@ import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class RecipeService {
   private recipes: Recipe[] = [
     new Recipe(
@@ -44,7 +44,6 @@ export class RecipeService {
   addIngredientsToCart(ingredients: Ingredient[]) {
     this.slService.addIngredientsToCart(ingredients);
   }
-
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
