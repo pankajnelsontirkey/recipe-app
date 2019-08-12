@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
-import { throwError } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { authVars } from '../config';
 
 export interface AuthResponseData {
   kind: string;
@@ -13,20 +14,13 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  authUrls = {
-    signUp: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
-    signIn:
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="
-  };
-  apiKey = "AIzaSyAopDsq1EtBA_sxIriHpcYmEWKNLxmPvWw";
-
   constructor(private http: HttpClient) {}
 
   signup(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${this.authUrls.signUp}${this.apiKey}`, {
+      .post<AuthResponseData>(`${authVars.signUp}${authVars.apiKey}`, {
         email: email,
         password: password,
         returnSecureToken: true
@@ -36,7 +30,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${this.authUrls.signIn}${this.apiKey}`, {
+      .post<AuthResponseData>(`${authVars.signIn}${authVars.apiKey}`, {
         email: email,
         password: password,
         returnSecureToken: true
@@ -45,19 +39,19 @@ export class AuthService {
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
-    let errorMessage: string = "An error occurred.";
+    let errorMessage: string = 'An error occurred.';
     if (!errorResponse.error || !errorResponse.error.error) {
       return throwError(errorMessage);
     }
     switch (errorResponse.error.error.message) {
-      case "EMAIL_EXISTS":
-        errorMessage = "The email is already registered.";
+      case 'EMAIL_EXISTS':
+        errorMessage = 'The email is already registered.';
         break;
-      case "EMAIL_NOT_FOUND":
-        errorMessage = "The email is not registered.";
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'The email is not registered.';
         break;
-      case "INVALID_PASSWORD":
-        errorMessage = "The password you entered is invalid.";
+      case 'INVALID_PASSWORD':
+        errorMessage = 'The password you entered is invalid.';
     }
     return throwError(errorMessage);
   }
