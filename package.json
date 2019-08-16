@@ -1,6 +1,6 @@
 {
-  "name": "my-ng-project",
-  "version": "0.0.0",
+  "name": "recipe-app",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "author": "Pankaj Nelson Tirkey",
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.1.2",
