@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject, BehaviorSubject } from 'rxjs';
-import { AuthVars } from '../config';
+import { throwError, BehaviorSubject } from 'rxjs';
+
 import { User } from './user.model';
-import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 export interface AuthResponseData {
   kind: string;
@@ -25,7 +26,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${AuthVars.signUp}${AuthVars.apiKey}`, {
+      .post<AuthResponseData>(`${environment.signUpURL}${environment.firebaseAPIKey}`, {
         email: email,
         password: password,
         returnSecureToken: true
@@ -40,7 +41,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${AuthVars.signIn}${AuthVars.apiKey}`, {
+      .post<AuthResponseData>(`${environment.signInURL}${environment.firebaseAPIKey}`, {
         email: email,
         password: password,
         returnSecureToken: true

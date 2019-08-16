@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  signUpURL: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
+  signInURL: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+  recipesURL: 'https://recipe-app-97573.firebaseio.com/recipes.json',
+  firebaseAPIKey: 'AIzaSyAopDsq1EtBA_sxIriHpcYmEWKNLxmPvWw'
 };
 
 /*

@@ -4,8 +4,8 @@ import { map, tap, take, exhaustMap } from 'rxjs/operators';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { AuthVars } from '../config';
 import { AuthService } from '../auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -13,13 +13,13 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put(AuthVars.recipesURL, recipes).subscribe(response => {
+    this.http.put(environment.recipesURL, recipes).subscribe(response => {
       console.log(response);
     });
   }
 
   fetchRecipes() {
-    return this.http.get<Recipe[]>(AuthVars.recipesURL).pipe(
+    return this.http.get<Recipe[]>(environment.recipesURL).pipe(
       map(recipes => {
         return recipes.map(recipe => ({
           ...recipe,

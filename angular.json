@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-ng-project": {
+    "recipe-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,17 +13,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-ng-project",
+            "outputPath": "dist/recipe-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
-            ],
+            "styles": ["node_modules/bootstrap/dist/css/bootstrap.min.css", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -56,18 +53,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-ng-project:build"
+            "browserTarget": "recipe-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-ng-project:build:production"
+              "browserTarget": "recipe-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-ng-project:build"
+            "browserTarget": "recipe-app:build"
           }
         },
         "test": {
@@ -85,11 +82,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
@@ -97,16 +90,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "my-ng-project:serve"
+            "devServerTarget": "recipe-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-ng-project:serve:production"
+              "devServerTarget": "recipe-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "my-ng-project"
+  "defaultProject": "recipe-app"
 }
